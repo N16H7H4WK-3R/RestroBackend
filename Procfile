@@ -1,0 +1,1 @@
+web: gunicorn restro_backend.wsgi --log-file -

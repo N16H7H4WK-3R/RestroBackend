@@ -1,0 +1,14 @@
+# read more about .gitignore file here: https://git-scm.com/docs/gitignore
+
+# Virtualenv files
+/venv
+
+# Database file
+*.sqlite3
+
+
+# env files
+.env
+
+#staticfiles
+/staticfiles
