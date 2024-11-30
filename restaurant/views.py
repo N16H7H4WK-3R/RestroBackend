@@ -34,10 +34,7 @@ class BookingViewSet(viewsets.ModelViewSet):
 
         # Regular user can only see their own bookings
         user_bookings = Booking.objects.filter(user=user)
-        logger.debug(
-            f"Regular user accessing their bookings: {
-                user_bookings.count()} found."
-        )
+        logger.debug(f"Regular user accessing their bookings: {user_bookings.count()} found.")
         return user_bookings
 
     def perform_create(self, serializer):
