@@ -151,3 +151,15 @@ DJOSER = {"USER_ID_FIELD": "username"}
 # ALLOW COOKIES TO BE INCLUDED WITH CROSS-ORIGIN REQUESTS
 
 CORS_ALLOW_CREDENTIALS = True
+
+
+CORS_ALLOWED_HEADERS = [
+    'content-type',
+    'authorization',
+    'x-requested-with',
+    'accept',
+    'origin',
+    'accept-language',
+    'user-agent',
+]
+CORS_EXPOSE_HEADERS = ['Authorization']
