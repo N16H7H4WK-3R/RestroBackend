@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from .models import Booking, MenuItem
 from .serializers import BookingSerializer, MenuItemSerializer, UserSerializer
 import logging
+from corsheaders.decorators import cors_allow_all
+from djoser.views import UserViewSet
 
 logger = logging.getLogger(__name__)
 
@@ -13,6 +15,12 @@ def index(request):
     return render(request, "index.html", {})
 
 
+@cors_allow_all  # This decorator applies the CORS headers to the specific view
+class CustomUserViewSet(UserViewSet):
+    pass
+
+
+@cors_allow_all
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -34,7 +42,8 @@ class BookingViewSet(viewsets.ModelViewSet):
 
         # Regular user can only see their own bookings
         user_bookings = Booking.objects.filter(user=user)
-        logger.debug(f"Regular user accessing their bookings: {user_bookings.count()} found.")
+        logger.debug(f"Regular user accessing their bookings: {
+                     user_bookings.count()} found.")
         return user_bookings
 
     def perform_create(self, serializer):
