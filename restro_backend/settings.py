@@ -20,9 +20,11 @@ DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
 # DEBUG = True
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(' ') if not DEBUG else []
+ALLOWED_HOSTS = os.environ.get(
+    "ALLOWED_HOSTS", "").split(' ') if not DEBUG else []
 
-CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS", "").split(' ') if not DEBUG else []
+CSRF_TRUSTED_ORIGINS = os.environ.get(
+    "CSRF_TRUSTED_ORIGINS", "").split(' ') if not DEBUG else []
 
 CSRF_COOKIE_SECURE = True
 
@@ -39,10 +41,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "rest_framework",
     "rest_framework.authtoken",
+    "corsheaders",
     'drf_yasg',
     "djoser",
     "restaurant",
 ]
+
+# Allowed origins for CORS
+
+CORS_ALLOWED_ORIGINS = os.environ.get(
+    "CORS_ALLOWED_ORIGINS", "").split(' ') if not DEBUG else []
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -53,6 +62,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = 'restro_backend.urls'
@@ -112,7 +122,6 @@ USE_I18N = True
 USE_TZ = True
 
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
@@ -137,3 +146,12 @@ REST_FRAMEWORK = {
 }
 
 DJOSER = {"USER_ID_FIELD": "username"}
+
+
+# ALLOW COOKIES TO BE INCLUDED WITH CROSS-ORIGIN REQUESTS
+
+CORS_ALLOW_CREDENTIALS = True
+
+# ALLOW ALL ORIGINS TO ACCESS THE API
+
+CORS_ALLOW_ALL_ORIGINS = True
